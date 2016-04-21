@@ -1,0 +1,1 @@
+# coingate-ruby
