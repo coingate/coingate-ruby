@@ -1,4 +1,6 @@
 class CoinGate::Merchant::Order
+  STATUSES = %w(pending confirming paid invalid canceled expired failed)
+
   def initialize(params)
     @order = params
 
@@ -9,12 +11,14 @@ class CoinGate::Merchant::Order
     end
   end
 
-  def to_hash
-    @order
+  STATUSES.each do |type|
+    define_method "#{type}?" do
+      status == type
+    end
   end
 
-  def pending?
-    status == 'pending'
+  def to_hash
+    @order
   end
 
   def self.find!(order_id, authentication={}, options={})
