@@ -9,8 +9,8 @@ Gem::Specification.new do |spec|
   spec.version       = CoinGate::VERSION
   spec.authors       = ['Tomas Achmedovas', 'Irmantas Bačiulis']
   spec.email         = ['info@coingate.com']
-  spec.summary       = %q{TODO}
-  spec.description   = %q{TODO}
+  spec.summary       = %q{Library for CoinGate}
+  spec.description   = %q{Library for CoinGate}
   spec.homepage      = 'https://coingate.com'
   spec.license       = 'MIT'
 
