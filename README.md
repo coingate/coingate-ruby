@@ -14,7 +14,7 @@ And then execute:
 
     $ bundle
 
-Or install it yourself as:
+Or install it yourself by executing:
 
     $ gem install coingate
     
