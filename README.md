@@ -37,8 +37,6 @@ CoinGate.config do |config|
 end
 ```
 
-If you are using *Ruby on Rails* add it to `config/initializers/paysera.rb`. However the gem usage is not restricted to Ruby on Rails, you can use it in any Ruby application.
-
 Or you can pass authentication params individually, for example:
 
 ```ruby
