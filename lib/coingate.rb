@@ -39,9 +39,9 @@ module CoinGate
       url = (
       case environment
         when 'sandbox'
-          'https://sandbox.coingate.com/api/v1'
+          'https://api-sandbox.coingate.com/v1'
         else
-          'https://coingate.com/api/v1'
+          'https://api.coingate.com/v1'
       end) + url
 
       nonce     = (Time.now.to_f * 1e6).to_i
