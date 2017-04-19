@@ -1,8 +1,12 @@
-# CoinGate
+# CoinGate Ruby Gem
 
-*CoinGate is...*
+CoinGate Bitcoin payment gateway.
 
 ## Installation
+
+Sign up for CoinGate account at <https://coingate.com> for live (production) and <https://sandbox.coingate.com> for testing (sandbox) environment.
+
+Please note, that for Sandbox you must generate separate API credentials on <https://sandbox.coingate.com>. API credentials generated on <https://coingate.com> will not work for Sandbox mode.
 
 Add this line to your application's Gemfile:
 
@@ -91,7 +95,7 @@ order = CoinGate::Merchant::Order.create!(post_params)
 #### CoinGate::Merchant::Order.find
 
 ```ruby
-order = CoinGate::Merchant::Order.find 1
+order = CoinGate::Merchant::Order.find(1)
 
 if order
   # success
@@ -104,5 +108,5 @@ end
 
 ```ruby
 # Raises exception when order is not found
-order = CoinGate::Merchant::Order.find! 1
+order = CoinGate::Merchant::Order.find!(1)
 ```
