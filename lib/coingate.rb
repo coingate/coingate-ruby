@@ -12,21 +12,19 @@ require 'json'
 
 module CoinGate
   class << self
-    attr_accessor :app_id, :api_key, :api_secret, :environment
+    attr_accessor :auth_token, :environment
 
     def config
       yield self
     end
 
     def api_request(url, request_method = :post, params = {}, authentication = {})
-      app_id      = authentication[:app_id] || self.app_id
-      api_key     = authentication[:api_key] || self.api_key
-      api_secret  = authentication[:api_secret] || self.api_secret
+      auth_token  = authentication[:auth_token] || self.auth_token
       environment = authentication[:environment] || self.environment || 'live'
 
-      # Check if credentials was passed
-      if app_id.nil? || api_key.nil? || api_secret.nil?
-        CoinGate.raise_error(400, {'reason' => 'CredentialsMissing'})
+      # Check if auth_token was passed
+      if auth_token.nil?
+        CoinGate.raise_error(400, {'reason' => 'AuthTokenMissing'})
       end
 
       # Check if right environment passed
@@ -39,19 +37,13 @@ module CoinGate
       url = (
       case environment
         when 'sandbox'
-          'https://api-sandbox.coingate.com/v1'
+          'https://api-sandbox.coingate.com/v2'
         else
-          'https://api.coingate.com/v1'
+          'https://api.coingate.com/v2'
       end) + url
 
-      nonce     = (Time.now.to_f * 1e6).to_i
-      message   = nonce.to_s + app_id.to_s + api_key
-      signature = OpenSSL::HMAC.hexdigest(OpenSSL::Digest.new('sha256'), api_secret, message)
-
       headers = {
-          'Access-Nonce'     => nonce,
-          'Access-Key'       => api_key,
-          'Access-Signature' => signature
+        Authorization: "Token #{auth_token}"
       }
 
       begin

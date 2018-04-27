@@ -21,7 +21,7 @@ And then execute:
 Or install it yourself by executing:
 
     $ gem install coingate
-    
+
 ## Usage
 
 ### Create API credentials
@@ -34,17 +34,17 @@ You can set default configuration like this:
 
 ```ruby
 CoinGate.config do |config|
-  config.app_id      = 1
-  config.api_key     = 'get_your_key_at_coingatecom'
-  config.api_secret  = 'get_your_key_at_coingatecom'
+  config.auth_token  = 'get_your_auth_token_at_coingatecom'
   config.environment = 'live' # live or sandbox. Default: live
 end
+
+order = CoinGate::Merchant::Order.find(1)
 ```
 
 Or you can pass authentication params individually, for example:
 
 ```ruby
-CoinGate::Merchant::Order.find(1, {app_id: 1, api_key: 'coingate', api_secret: 'coingate', environment: 'sandbox'})
+order = CoinGate::Merchant::Order.find(1, {auth_token: 'coingate', environment: 'sandbox'})
 ```
 
 ### Create Order
@@ -54,8 +54,8 @@ CoinGate::Merchant::Order.find(1, {app_id: 1, api_key: 'coingate', api_secret: '
 ```ruby
 post_params = {
   order_id:         'ORDER-1412759367',
-  price:            1050.99,
-  currency:         'USD',
+  price_amount:     1050.99,
+  price_currency:   'USD',
   receive_currency: 'EUR',
   callback_url:     'https://example.com/payments/callback?token=6tCENGUYI62ojkuzDPX7Jg',
   cancel_url:       'https://example.com/cart',
@@ -77,8 +77,8 @@ end
 ```ruby
 post_params = {
   order_id:         'ORDER-1412759367',
-  price:            1050.99,
-  currency:         'USD',
+  price_amount:     1050.99,
+  price_currency:   'USD',
   receive_currency: 'EUR',
   callback_url:     'https://example.com/payments/callback?token=6tCENGUYI62ojkuzDPX7Jg',
   cancel_url:       'https://example.com/cart',

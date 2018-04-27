@@ -9,14 +9,14 @@ module CoinGate
     raise (case http_code
       when 400
         case reason
-          when 'CredentialsMissing' then CredentialsMissing
+          when 'AuthTokenMissing' then AuthTokenMissing
           when 'BadEnvironment' then BadEnvironment
           else BadRequest
         end
 
       when 401 then
         case reason
-          when 'BadCredentials' then BadCredentials
+          when 'BadAuthToken' then BadAuthToken
           else Unauthorized
         end
 
@@ -34,6 +34,8 @@ module CoinGate
           when 'OrderIsNotValid' then OrderIsNotValid
           else UnprocessableEntity
         end
+        
+      when 429 then RateLimitException
 
       when 500 then InternalServerError
 

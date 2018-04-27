@@ -1,5 +1,5 @@
 class CoinGate::Merchant::Order
-  STATUSES = %w(pending confirming paid invalid canceled expired failed)
+  STATUSES = %w(new pending confirming paid invalid canceled expired failed)
 
   def initialize(params)
     @order = params
